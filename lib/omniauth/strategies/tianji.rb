@@ -11,23 +11,27 @@ module OmniAuth
         super
       end
 
-      uid { raw_info['uid'] }
+      uid { raw_info['id'] }
+
 
       info do
         {
-          "uid" => raw_info["uid"], 
-          "gender"=> (raw_info['gender'] == '0' ? 'Male' : 'Female'), 
-          "image"=>raw_info['logo50'],
+          "uid" => raw_info["id"], 
+          "gender"=> raw_info['gender'],
+          'contact_count' => raw_info['contact_count'],
+          'location' => raw_info['location'],
+          'language' => raw_info['language']
+          "image"=>raw_info['picture_large'],
           'name' => raw_info['name'],
+          'title' => raw_info['headline'],
           'urls' => {
-            'Kaixin' => "http://www.kaixin001.com/"
+            'Tianji' => raw_info['link']
           }
         }
       end
 
       def raw_info
         @raw_info ||= MultiJson.decode(access_token.get("https://api.tianji.com/me?access_token=#{@access_token.token}").body)
-        puts @raw_info.inspect
         @raw_info
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
