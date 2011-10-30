@@ -26,7 +26,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= MultiJson.decode(access_token.get("http://api.tianji.com/users/me.json?access_token=#{@access_token.token}").body)
+        @raw_info ||= MultiJson.decode(access_token.get("http://api.tianji.com/me.json?access_token=#{@access_token.token}").body)
         puts @raw_info.inspect
         @raw_info
       rescue ::Errno::ETIMEDOUT
