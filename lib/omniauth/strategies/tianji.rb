@@ -20,7 +20,7 @@ module OmniAuth
           "gender"=> raw_info['gender'],
           'contact_count' => raw_info['contact_count'],
           'location' => raw_info['location'],
-          'language' => raw_info['language']
+          'language' => raw_info['language'],
           "image"=>raw_info['picture_large'],
           'name' => raw_info['name'],
           'title' => raw_info['headline'],
