@@ -5,8 +5,7 @@ module OmniAuth
       option :client_options, {
         :site          => 'https://login.tianji.com/',
         :authorize_url => '/authz/oauth/authorize',
-        :token_url     => '/authz/oauth/token',
-        :token_method  => :post
+        :token_url     => '/authz/oauth/token'
       }
       def request_phase
         super
@@ -27,7 +26,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= MultiJson.decode(access_token.get("/users/me.json?access_token=#{@access_token.token}").body)
+        @raw_info ||= MultiJson.decode(access_token.get("http://api.tianji.com/users/me.json?access_token=#{@access_token.token}").body)
         puts @raw_info.inspect
         @raw_info
       rescue ::Errno::ETIMEDOUT
